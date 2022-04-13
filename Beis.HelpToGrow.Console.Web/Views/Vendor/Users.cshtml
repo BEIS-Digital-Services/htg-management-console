@@ -1,0 +1,50 @@
+﻿@using Beis.HelpToGrow.Console.Web.Constants
+@model Beis.HelpToGrow.Console.Web.Models.VendorCompanyUserViewModel
+@{
+    ViewData["Title"] = "Users List Page";
+}
+
+<a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorCompanyDetailsGet, new { id = Model.CompanyId })">
+    Back
+</a>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-5">
+            @Model.CompanyName: @Model.CompanyRegistrationNumber
+            <span class="govuk-caption-l">Company details (Vendor Id: @Model.CompanyId)</span>
+        </h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">User name</th>
+                    <th scope="col" class="govuk-table__header">Name</th>
+                    <th scope="col" class="govuk-table__header">Primary contact</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                @foreach (var user in Model.Users)
+                {
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@user.FullName</td>
+                        <td class="govuk-table__cell">@user.Email</td>
+                        @if (user.PrimaryContact)
+                        {
+                            <td class="govuk-table__cell">Yes</td>
+                        }
+                        else
+                        {
+                            <td class="govuk-table__cell">No</td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

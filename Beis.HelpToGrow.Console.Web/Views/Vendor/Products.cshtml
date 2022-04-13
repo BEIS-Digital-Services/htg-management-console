@@ -1,0 +1,53 @@
+﻿@using Beis.HelpToGrow.Console.Web.Constants
+@model Beis.HelpToGrow.Console.Web.Models.VendorProductViewModel
+
+@{
+    ViewData["Title"] = "Vendor Products";
+}
+<a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorCompanyDetailsGet, new { id = Model.VendorId })">
+    Back
+</a>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+
+        <h1 class="govuk-heading-l govuk-!-margin-bottom-5">
+            @Model.VendorCompanyName : @Model.VendorCompanyHouseRegNo
+            <span class="govuk-caption-l">Products</span>
+        </h1>
+    </div>
+</div>
+
+@if (Model.ProductDetails.Any())
+{
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">Product name</th>
+                        <th scope="col" class="govuk-table__header">Status</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @foreach (var productDetail in Model.ProductDetails)
+                    {
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">
+                                <a asp-route="@RouteNameConstants.VendorProductGet" class="govuk-link" asp-route-id="@productDetail.ProductId" asp-route-vid="@Model.VendorId">
+                                    @productDetail.ProductName
+                                </a>
+                            </td>
+                            <td class="govuk-table__cell">@productDetail.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+}
+else
+{
+    <p class="govuk-body-s">No Products</p>
+}

@@ -1,0 +1,87 @@
+﻿@using Beis.HelpToGrow.Console.Web.Constants
+@model Beis.HelpToGrow.Console.Web.Models.VendorCompanyViewModel
+
+@{
+    ViewData["Title"] = "Company Details";
+
+    string DisplayText(string modelItem)
+    {
+        return string.IsNullOrWhiteSpace(modelItem) || @modelItem.Equals("0") ? "Not Available" : modelItem;
+    }
+}
+
+@section Authentication {
+<partial name="_Authentication" />
+}
+
+<a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorIndexGet)">
+    Back
+</a>
+
+<form class="form" method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+
+            <h1 class="govuk-heading-l govuk-!-margin-bottom-5">
+                @Model.VendorCompanyName: @Model.VendorCompanyHouseRegNo
+                <span class="govuk-caption-l">Company details (Vendor Id: @Model.VendorId)</span>
+            </h1>
+            <p>
+                <a asp-route="@RouteNameConstants.VendorProductsGet" class="govuk-link" asp-route-id="@Model.VendorId">
+                    Help to Grow : Digital products
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Company name</h2>
+            <p class="govuk-body-s">@Model.VendorCompanyName</p>
+            
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Companies House Registration Number</h2>
+            <p class="govuk-body-s">@Model.VendorCompanyHouseRegNo</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Companies House Registered Office Address</h2>
+            <p class="govuk-body-s govuk-!-margin-bottom-1">@Model.VendorCompanyAddress1</p>
+            <p class="govuk-body-s govuk-!-margin-bottom-1">@Model.VendorCompanyAddress2</p>
+            <p class="govuk-body-s">@Model.VendorCompanyCity, @Model.VendorCompanyPostcode</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Company Website URL</h2>
+            <p class="govuk-body-s">@DisplayText(Model.VendorWebsiteUrl)</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Vendor notification email</h2>
+            <p class="govuk-body-s">@DisplayText(Model.VendorNotificationEmail)</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Vendor company profile</h2>
+            <p class="govuk-body-s">@DisplayText(Model.VendorCompanyProfile)</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Application status</h2>
+            <p class="govuk-body-s">
+                @Html.DropDownListFor(m => m.ApplicationStatusId, new SelectList(Model.VendorStatuses, "Id", "Description"), new { @data_id = Model.VendorId, @class = "govuk-list" })
+            </p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Locked by</h2>
+            <p class="govuk-body-s">@Model.LockedBy</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Encryption code</h2>
+            <p class="govuk-body-s"> @DisplayText(Model.EncryptionCode)</p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Access secret</h2>
+            <p class="govuk-body-s">
+                @DisplayText(Model.AccessSecret)
+            </p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">IP addresses</h2>
+            <p class="govuk-body-s">
+                @DisplayText(Model.IpAddresses)
+            </p>
+
+            <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Edit log</h2>
+            <p class="govuk-body-s">
+                @DisplayText(Model.EditLog)
+            </p>
+            <button class="govuk-button" data-module="govuk-button" id="UpdateStatus1">Update Status</button>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,38 @@
+﻿@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+
+        <div class="govuk-form-group">
+            <fieldset class="govuk-fieldset">
+                <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+                    <h1 class="govuk-fieldset__heading">
+                        Sign in to your Help to Grow Digital account
+                    </h1>
+                </legend>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="email">
+                        Email
+                    </label>
+                    <input class="govuk-input govuk-!-width-three-quarters" id="email" name="email" type="text" value="">
+                </div>
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="password">
+                        Password
+                    </label>
+                    <input class="govuk-input govuk-!-width-three-quarters" id="password" name="password" type="text" value="">
+                </div>
+                <div class="govuk-form-group">
+                    <a href="forgot-password" class="govuk-link">Forgot password</a>
+                </div>
+            </fieldset>
+        </div>
+
+        <form class="form" action="../account-home/account-home" method="get">
+            <button class="govuk-button" data-module="govuk-button">Continue</button
+        </form>
+
+    </div>
+</div>

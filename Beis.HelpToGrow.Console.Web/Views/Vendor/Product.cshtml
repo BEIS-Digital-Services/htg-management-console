@@ -1,0 +1,210 @@
+﻿@model Beis.HelpToGrow.Console.Web.Models.ProductViewModel
+@using Beis.HelpToGrow.Console.Web.Helpers;
+@using Beis.HelpToGrow.Console.Web.Constants
+@{
+    ViewData["Title"] = "Vendor Product";
+}
+
+<a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorProductsGet, new { id = Model.VendorId })">
+    Back
+</a>
+<form class="form" method="post">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <input type="hidden" asp-for="@Model.VendorId" />
+            <h1 class="govuk-heading-l govuk-!-margin-bottom-5">
+                @Model.VendorCompanyName: @Model.VendorCompanyHouseRegNo
+                <span class="govuk-caption-l">@Model.ProductName</span>
+            </h1>
+
+        </div>
+    </div>
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">Item</th>
+                        <th scope="col" class="govuk-table__header">Date</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product Summary</th>
+                        <td class="govuk-table__cell">
+                            @Html.Nl2Br(@Model.DraftProductDescription)
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product logo</th>
+                        <td class="govuk-table__cell">
+                            @if (!string.IsNullOrWhiteSpace(Model.ProductLogo) && Model.ProductLogo.Contains("."))
+                            {
+                                <img src="@Model.ProductLogo" alt="Image alt text" class="govuk-!-margin-top-3 govuk-!-margin-bottom-3">
+                            }
+                            else
+                            {
+                                @Model.ProductLogo
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Redemption URL</th>
+                        <td class="govuk-table__cell">@Model.RedemptionUrl</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product capabilities</th>
+                        <td class="govuk-table__cell">
+                            @if (Model.ProductCapabilities != null && Model.ProductCapabilities.Count > 0)
+                            {
+                                <ul class="govuk-list">
+                                    @foreach (var productCapability in Model.ProductCapabilities)
+                                    {
+                                        <li>@productCapability</li>
+                                    }
+                                </ul> 
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Support</th>
+                        <td class="govuk-table__cell">
+                            @if (Model.SupportItems != null && Model.SupportItems.Count > 0)
+                            {
+                                <ul class="govuk-list">
+                                    @foreach (var supportItem in Model.SupportItems)
+                                    {
+                                        <li>@supportItem</li>
+                                    }
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Training</th>
+                        <td class="govuk-table__cell">
+                            @if (Model.TrainingItems != null && Model.TrainingItems.Count > 0)
+                            {
+                                <ul class="govuk-list">
+                                    @foreach (var trainingItem in Model.TrainingItems)
+                                    {
+                                        <li>@trainingItem</li>
+                                    }
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Platform</th>
+                        <td class="govuk-table__cell">
+                            @if (Model.PlatformItems != null && Model.PlatformItems.Count > 0)
+                            {
+                                <ul class="govuk-list">
+                                    @foreach (var platformItem in Model.PlatformItems)
+                                    {
+                                        <li>@platformItem</li>
+                                    }
+                                </ul>
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Compatibility with other systems</th>
+                        <td class="govuk-table__cell">
+                            <div class="beis-expand-textarea">
+                                <textarea class="govuk-input govuk-!-width-three-quarters beis-full-textarea" disabled asp-for="OtherCompatibility" rows="10"></textarea>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Review link</th>
+                        <td class="govuk-table__cell"> @Model.ReviewUrl</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product id</th>
+                        <td class="govuk-table__cell">@Model.ProductId</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Vendor id</th>
+                        <td class="govuk-table__cell">@Model.VendorId</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product SKU</th>
+                        <td class="govuk-table__cell">@Model.ProductSku</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product type</th>
+                        <td class="govuk-table__cell">@Model.ProductType</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Product version</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.ProductVersion)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Website URL</th>
+                        <td class="govuk-table__cell">@Model.WebsiteUrl</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Cyber compliance</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.CyberCompliance)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Minimum software requirements</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.MinimumSoftwareRequirements)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Has customer ratings</th>
+                        <td class="govuk-table__cell">
+                            @if (string.IsNullOrWhiteSpace(Model.Ratings))
+                            {
+                                @Html.Raw("No")
+                            }
+                            else
+                            {
+                                @Html.Raw("Yes");
+                            }
+                        </td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Price</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.Price)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Sales discount</th>
+                        <td class="govuk-table__cell">@Model.SalesDiscount</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">SME support</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.SmeSupport)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Target customer</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.TargetCustomer)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Ratings</th>
+                        <td class="govuk-table__cell">@Html.Nl2Br(@Model.Ratings)</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Retention rate </th>
+                        <td class="govuk-table__cell">@Model.RetentionRate</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Customer base </th>
+                        <td class="govuk-table__cell">@Model.CustomerBase</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <th scope="row" class="govuk-table__header">Status</th>
+                        <td class="govuk-table__cell">
+                            <p class="govuk-body-s">
+                                @Html.DropDownListFor(m => m.StatusId, new SelectList(Model.ProductStatuses, "Id", "Description"), new { @data_id = Model.ProductId, @class = "govuk-list" })
+                            </p>
+                            <p><button class="govuk-button" data-module="govuk-button" id="UpdateStatus">Update Status</button></p>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</form>
