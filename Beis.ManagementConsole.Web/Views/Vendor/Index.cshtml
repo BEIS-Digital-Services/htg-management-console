@@ -1,0 +1,38 @@
+﻿@using Beis.ManagementConsole.Web.Constants
+@model IEnumerable<Beis.ManagementConsole.Web.Models.VendorCompanyAccountHomeViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-l">Vendor List</h1>
+    </div>
+</div>
+
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">Vendor ID</th>
+                    <th scope="col" class="govuk-table__header">Name</th>
+                    <th scope="col" class="govuk-table__header">Status</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                @foreach (var item in Model)
+                {
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@item.VendorId</td>
+                        <td class="govuk-table__cell">
+                            @Html.RouteLink(@item.VendorCompanyName, RouteNameConstants.VendorCompanyDetailsGet, new { id = item.VendorId }, new { @class = "govuk-link" })
+                        </td>
+                        <td class="govuk-table__cell">@item.ApplicationStatus</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>
