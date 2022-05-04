@@ -59,7 +59,7 @@
 
             if (!string.IsNullOrWhiteSpace(product.ProductLogo) && product.ProductLogo.Contains("."))
             {
-                product.ProductLogo = $"{_logoInformation.Product_Logo_Url}{_logoInformation.Path}{product.ProductLogo.Substring(product.ProductLogo.LastIndexOf(@"\") + 1)}";
+                product.ProductLogo = $"{_logoInformation.ProductLogoUrl}{_logoInformation.Path}{product.ProductLogo.Substring(product.ProductLogo.LastIndexOf(@"\", StringComparison.InvariantCultureIgnoreCase) + 1)}";
             }
             
             var vendorCompany = await this.GetVendorCompany(request.VendorId);

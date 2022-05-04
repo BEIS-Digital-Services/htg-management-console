@@ -39,7 +39,7 @@ namespace Beis.HelpToGrow.Console.Web.UnitTests
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
                     {"LogoInformation:Path", "/uploads/"},
-                    {"LogoInformation:Product_Logo_Url", "https://localhost:8158"}
+                    {"LogoInformation:ProductLogoUrl", "https://localhost:8158"}
                 })
                 .Build();
 

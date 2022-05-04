@@ -6,6 +6,6 @@
 
         public string Path { get; set; } = string.Empty;
 
-        public string Product_Logo_Url { get; set; } = string.Empty;
+        public string ProductLogoUrl { get; set; } = string.Empty;
     }
 }
