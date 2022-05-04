@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
 	  <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
-	  <UserSecretsId>6aa91649-feea-4d79-87fa-b6bcdaf617d6</UserSecretsId>
 	  <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+	  <UserSecretsId>c2394d21-bd9f-4d28-b468-873eb9200ecd</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'WebApp_OpenIDConnect_DotNet' " />
@@ -21,6 +21,7 @@
 	<PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.15" />
 	<PackageReference Include="Microsoft.AspNetCore.Mvc.ViewFeatures" Version="2.2.0" />
 	<PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="5.0.12" />
+	<PackageReference Include="Microsoft.Extensions.Configuration.AzureAppConfiguration" Version="5.0.0" />
 	<PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.14" />
     <PackageReference Include="Microsoft.Identity.Web" Version="1.16.0" />
     <PackageReference Include="Microsoft.Identity.Web.UI" Version="1.16.0" />
