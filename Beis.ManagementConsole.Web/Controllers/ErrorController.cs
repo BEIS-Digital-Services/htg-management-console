@@ -1,6 +1,4 @@
-﻿using Beis.ManagementConsole.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 namespace Beis.ManagementConsole.Web.Controllers
 {

@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Beis.ManagementConsole.Web.Models.Enums
+﻿namespace Beis.ManagementConsole.Web.Models.Enums
 {
     public enum ProductStatuses
     {

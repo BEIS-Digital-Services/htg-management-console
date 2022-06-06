@@ -1,13 +1,4 @@
-﻿using AutoMapper;
-using Beis.ManagementConsole.Repositories.Interface;
-using Beis.ManagementConsole.Web.Models;
-using MediatR;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-
-namespace Beis.ManagementConsole.Web.Handlers
+﻿namespace Beis.ManagementConsole.Web.Handlers
 {
     public class GetProductsHandler : IRequestHandler<GetProductsHandler.Context, VendorProductViewModel>
     {

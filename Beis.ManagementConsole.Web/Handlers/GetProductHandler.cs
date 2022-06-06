@@ -1,17 +1,4 @@
-﻿using AutoMapper;
-using Beis.Htg.VendorSme.Database.Models;
-using Beis.ManagementConsole.Repositories.Interface;
-using Beis.ManagementConsole.Web.Models;
-using Beis.ManagementConsole.Web.Models.Enums;
-using Beis.ManagementConsole.Web.Options;
-using MediatR;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Options;
 
 namespace Beis.ManagementConsole.Web.Handlers
 {
@@ -25,7 +12,7 @@ namespace Beis.ManagementConsole.Web.Handlers
         private readonly IProductCapabilitiesRepository _productCapabilitiesRepository;
         private readonly ISettingsProductCapabilitiesRepository _settingsProductCapabilitiesRepository;
         private readonly IVendorCompanyRepository _vendorCompanyRepository;
-        private readonly LogoInformationOption _logoInformation;
+        private readonly Options.ServiceCollectionExtensions _logoInformation;
         private readonly IMapper _mapper;
 
         public GetProductHandler(
@@ -37,7 +24,7 @@ namespace Beis.ManagementConsole.Web.Handlers
             IProductCapabilitiesRepository productCapabilitiesRepository,
             ISettingsProductCapabilitiesRepository settingsProductCapabilitiesRepository,
             IVendorCompanyRepository vendorCompanyRepository,
-            IOptions<LogoInformationOption> logoInformationOption,
+            IOptions<Options.ServiceCollectionExtensions> logoInformationOption,
             IMapper mapper)
         {
             _productRepository = productRepository;

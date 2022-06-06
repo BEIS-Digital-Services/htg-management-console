@@ -1,6 +1,6 @@
 ﻿namespace Beis.ManagementConsole.Web.Options
 {
-    public class LogoInformationOption
+    public class ServiceCollectionExtensions
     {
         public const string LogoInformation = "LogoInformation";
 

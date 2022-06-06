@@ -1,8 +1,4 @@
-﻿using Beis.ManagementConsole.Web.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
-
-namespace Beis.ManagementConsole.Web.Attributes
+﻿namespace Beis.ManagementConsole.Web.Attributes
 {
     public class HttpResponseExceptionAttribute : ActionFilterAttribute
     {
