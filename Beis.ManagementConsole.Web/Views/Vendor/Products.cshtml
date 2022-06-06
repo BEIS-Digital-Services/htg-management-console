@@ -3,9 +3,15 @@
 @{
     ViewData["Title"] = "Vendor Products";
 }
-<a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorCompanyDetailsGet, new { id = Model.VendorId })">
-    Back
-</a>
+
+@section Navigation {
+    <partial name="_Users" />
+    <div class="govuk-clearfix">
+        <a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorCompanyDetailsGet, new { id = Model.VendorId })">
+            Back
+        </a>
+    </div>
+}
 
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-full">

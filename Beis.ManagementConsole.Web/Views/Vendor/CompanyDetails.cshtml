@@ -9,13 +9,14 @@
     }
 }
 
-@section Authentication {
-<partial name="_Authentication" />
+@section Navigation {
+    <partial name="_Users" />
+    <div class="govuk-clearfix">
+        <a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorIndexGet)">
+            Back
+        </a>
+    </div>
 }
-
-<a class="govuk-back-link" href="@Url.RouteUrl(RouteNameConstants.VendorIndexGet)">
-    Back
-</a>
 
 <form class="form" method="post">
     <div class="govuk-grid-row">
@@ -37,7 +38,7 @@
         <div class="govuk-grid-column-full">
             <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Company name</h2>
             <p class="govuk-body-s">@Model.VendorCompanyName</p>
-            
+
             <h2 class="govuk-heading-s govuk-!-margin-bottom-1">Companies House Registration Number</h2>
             <p class="govuk-body-s">@Model.VendorCompanyHouseRegNo</p>
 
