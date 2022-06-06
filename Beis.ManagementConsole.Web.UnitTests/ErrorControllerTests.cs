@@ -1,9 +1,3 @@
-using Beis.ManagementConsole.Web.Controllers;
-using Beis.ManagementConsole.Web.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Xunit;
-
 namespace Beis.ManagementConsole.Web.UnitTests
 {
     public class ErrorControllerTests

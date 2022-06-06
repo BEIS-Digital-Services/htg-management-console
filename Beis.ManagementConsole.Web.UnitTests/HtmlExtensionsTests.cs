@@ -1,13 +1,11 @@
 ﻿using Beis.ManagementConsole.Web.Helpers;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Mvc.ViewFeatures.Buffers;
 using Microsoft.Extensions.WebEncoders.Testing;
 using Moq;
-using Xunit;
 
 namespace Beis.ManagementConsole.Web.UnitTests
 {

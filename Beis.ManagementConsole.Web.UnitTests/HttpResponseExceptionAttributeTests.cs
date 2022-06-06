@@ -1,12 +1,6 @@
 ﻿using Beis.ManagementConsole.Web.Attributes;
-using Beis.ManagementConsole.Web.Models;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Abstractions;
-using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
-using System.Collections.Generic;
-using Xunit;
 
 namespace Beis.ManagementConsole.Web.UnitTests
 {

@@ -60,4 +60,9 @@
 	    <HintPath>..\Beis.ManagementConsole.Repositories\Library\Beis.Htg.VendorSme.Database.dll</HintPath>
 	  </Reference>
 	</ItemGroup>
+  <ItemGroup>
+	  <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+		  <_Parameter1>Beis.ManagementConsole.Web.UnitTests</_Parameter1>
+	  </AssemblyAttribute>
+  </ItemGroup>
 </Project>

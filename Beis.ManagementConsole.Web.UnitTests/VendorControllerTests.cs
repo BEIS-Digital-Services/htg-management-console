@@ -1,18 +1,11 @@
 using AutoFixture;
 using Beis.Htg.VendorSme.Database;
-using Beis.Htg.VendorSme.Database.Models;
-using Beis.ManagementConsole.Web.Controllers;
-using Beis.ManagementConsole.Web.Models;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
+using Beis.ManagementConsole.Web.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MockQueryable.Moq;
-using Moq;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Xunit;
 
 namespace Beis.ManagementConsole.Web.UnitTests
 {
@@ -41,10 +34,9 @@ namespace Beis.ManagementConsole.Web.UnitTests
                 })
                 .Build();
 
-            var startUp = new Startup(configuration);
             var serviceCollection = new ServiceCollection();
+            serviceCollection.RegisterAllServices(configuration);
             serviceCollection.AddScoped(options => _mockHtgVendorSmeDbContext.Object);
-            startUp.ConfigureServices(serviceCollection);
             var serviceProvider = serviceCollection.BuildServiceProvider();
             
             _sut = new VendorController(serviceProvider.GetService<IMediator>());
