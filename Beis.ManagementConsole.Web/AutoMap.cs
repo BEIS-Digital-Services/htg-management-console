@@ -1,9 +1,4 @@
-﻿using AutoMapper;
-using Beis.Htg.VendorSme.Database.Models;
-using Beis.ManagementConsole.Web.Models;
-using System.Collections.Generic;
-
-namespace Beis.ManagementConsole.Web
+﻿namespace Beis.ManagementConsole.Web
 {
     public class AutoMap : Profile
     {

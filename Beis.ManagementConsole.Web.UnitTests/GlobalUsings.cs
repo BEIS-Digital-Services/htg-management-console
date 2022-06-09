@@ -1,0 +1,11 @@
+﻿global using Beis.Htg.VendorSme.Database.Models;
+global using Beis.ManagementConsole.Web.Controllers;
+global using Beis.ManagementConsole.Web.Models;
+global using MediatR;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Moq;
+global using System.Collections.Generic;
+global using Xunit;

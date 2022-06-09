@@ -1,9 +1,5 @@
 ﻿using Beis.ManagementConsole.Web.Constants;
 using Beis.ManagementConsole.Web.Handlers;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Beis.ManagementConsole.Web.Controllers
 {

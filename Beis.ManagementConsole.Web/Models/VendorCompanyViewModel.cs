@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Beis.ManagementConsole.Web.Models
+﻿namespace Beis.ManagementConsole.Web.Models
 {
     public class VendorCompanyViewModel
     {

@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace Beis.ManagementConsole.Web.Models
+﻿namespace Beis.ManagementConsole.Web.Models
 {
     public class VendorCompanyUserViewModel
     {

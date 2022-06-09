@@ -1,0 +1,13 @@
+﻿global using AutoMapper;
+global using Beis.Htg.VendorSme.Database.Models;
+global using Beis.ManagementConsole.Repositories.Interface;
+global using Beis.ManagementConsole.Web.Constants;
+global using Beis.ManagementConsole.Web.Models;
+global using Beis.ManagementConsole.Web.Models.Enums;
+global using MediatR;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.AspNetCore.Mvc.Filters;
+global using Microsoft.AspNetCore.Mvc.Rendering;
+global using Microsoft.EntityFrameworkCore;
+global using System.ComponentModel.DataAnnotations;

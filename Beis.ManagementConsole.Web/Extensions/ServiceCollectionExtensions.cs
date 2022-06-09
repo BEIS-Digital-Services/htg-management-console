@@ -1,47 +1,25 @@
 ﻿using Beis.Htg.VendorSme.Database;
 using Beis.ManagementConsole.Repositories;
-using Beis.ManagementConsole.Repositories.Interface;
 using Beis.ManagementConsole.Web.Attributes;
-using Beis.ManagementConsole.Web.Options;
 using FluentValidation.AspNetCore;
-using MediatR;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.DataProtection;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpOverrides;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.Identity.Web;
 using Microsoft.Identity.Web.UI;
 using System.Net.Mime;
 using System.Reflection;
 
-namespace Beis.ManagementConsole.Web
+namespace Beis.ManagementConsole.Web.Extensions
 {
-    public class Startup
+    internal static class ServiceCollectionExtensions
     {
-        private readonly IConfiguration _configuration;
-
-        public Startup(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
-
-
-        // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        internal static void RegisterAllServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddLogging(options => { options.AddConsole(); });
 
-            services.AddApplicationInsightsTelemetry(_configuration["AzureMonitorInstrumentationKey"]);
+            services.AddApplicationInsightsTelemetry(configuration["AzureMonitorInstrumentationKey"]);
 
             services.AddMvc();
 
@@ -54,7 +32,7 @@ namespace Beis.ManagementConsole.Web
             });
 
             services.AddAuthentication(OpenIdConnectDefaults.AuthenticationScheme)
-            .AddMicrosoftIdentityWebApp(options => _configuration.Bind("AzureAdB2C", options));
+                .AddMicrosoftIdentityWebApp(options => configuration.Bind("AzureAdB2C", options));
 
             services.AddControllersWithViews(options =>
             {
@@ -69,7 +47,7 @@ namespace Beis.ManagementConsole.Web
                 {
                     fv.DisableDataAnnotationsValidation = true;
                     fv.ImplicitlyValidateChildProperties = true;
-                    fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+                    fv.RegisterValidatorsFromAssemblyContaining<Program>();
                 })
                 .ConfigureApiBehaviorOptions(options =>
                 {
@@ -84,14 +62,16 @@ namespace Beis.ManagementConsole.Web
                     };
                 });
 
-            services.AddDbContext<HtgVendorSmeDbContext>(options => options.UseNpgsql(_configuration["HelpToGrowDbConnectionString"]));
+            services.AddDbContext<HtgVendorSmeDbContext>(options =>
+                options.UseNpgsql(configuration["HelpToGrowDbConnectionString"]));
             services.AddDataProtection().PersistKeysToDbContext<HtgVendorSmeDbContext>();
 
             services.AddMediatR(Assembly.GetExecutingAssembly());
 
             services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IProductFiltersRepository, ProductFiltersRepository>();
-            services.AddScoped<ISettingsProductFiltersCategoriesRepository, SettingsProductFiltersCategoriesRepository>();
+            services
+                .AddScoped<ISettingsProductFiltersCategoriesRepository, SettingsProductFiltersCategoriesRepository>();
             services.AddScoped<ISettingsProductFiltersRepository, SettingsProductFiltersRepository>();
             services.AddScoped<ISettingsProductTypesRepository, SettingsProductTypesRepository>();
             services.AddScoped<ISettingsProductCapabilitiesRepository, SettingsProductCapabilitiesRepository>();
@@ -99,61 +79,26 @@ namespace Beis.ManagementConsole.Web
             services.AddScoped<IVendorCompanyRepository, VendorCompanyRepository>();
             services.AddScoped<IVendorCompanyUserRepository, VendorCompanyUserRepository>();
             services.AddScoped<IVendorCompanyStatusRepository, VendorCompanyStatusRepository>();
-            services.Configure<LogoInformationOption>(_configuration.GetSection(LogoInformationOption.LogoInformation));
+            services.Configure<Options.ServiceCollectionExtensions>(
+                configuration.GetSection(Options.ServiceCollectionExtensions.LogoInformation));
 
             services.AddRazorPages();
 
             services.AddOptions();
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.Secure = CookieSecurePolicy.Always;
-            });
+            services.Configure<CookiePolicyOptions>(options => { options.Secure = CookieSecurePolicy.Always; });
 
             services.Configure<ForwardedHeadersOptions>(options =>
             {
                 options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto |
-                    ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedHost;
+                                           ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedHost;
                 options.ForwardedHostHeaderName = "X-Original-Host";
                 options.KnownNetworks.Clear();
                 options.KnownProxies.Clear();
             });
 
-            services.AddAutoMapper(c => c.AddProfile<AutoMap>(), typeof(Startup));
+            services.AddAutoMapper(c => c.AddProfile<AutoMap>(), typeof(Program));
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-        }
-
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            app.UseForwardedHeaders();
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseCookiePolicy();
-
-            app.UseRouting();
-
-            app.UseAuthentication();
-            app.UseAuthorization();
-
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Vendor}/{action=Index}/{id?}");
-                endpoints.MapRazorPages();
-            });
         }
     }
 }

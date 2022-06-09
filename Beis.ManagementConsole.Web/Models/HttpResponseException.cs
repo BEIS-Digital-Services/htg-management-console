@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Beis.ManagementConsole.Web.Models
+﻿namespace Beis.ManagementConsole.Web.Models
 {
     public class HttpResponseException : Exception
     {
