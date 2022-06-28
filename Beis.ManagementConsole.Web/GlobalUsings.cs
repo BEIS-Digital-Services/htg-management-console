@@ -1,5 +1,5 @@
 ﻿global using AutoMapper;
-global using Beis.Htg.VendorSme.Database.Models;
+global using Beis.HelpToGrow.Persistence.Models;
 global using Beis.ManagementConsole.Repositories.Interface;
 global using Beis.ManagementConsole.Web.Constants;
 global using Beis.ManagementConsole.Web.Models;

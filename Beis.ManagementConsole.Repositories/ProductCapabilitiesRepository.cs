@@ -1,7 +1,6 @@
 ﻿namespace Beis.ManagementConsole.Repositories
 {
     public class ProductCapabilitiesRepository : IProductCapabilitiesRepository
-
     {
         private readonly HtgVendorSmeDbContext _context;
 

@@ -1,4 +1,4 @@
-﻿using Beis.Htg.VendorSme.Database;
+﻿using Beis.HelpToGrow.Persistence;
 using Beis.ManagementConsole.Repositories;
 using Beis.ManagementConsole.Web.Attributes;
 using FluentValidation.AspNetCore;

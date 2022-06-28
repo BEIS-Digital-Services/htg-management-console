@@ -1,5 +1,6 @@
 using AutoFixture;
-using Beis.Htg.VendorSme.Database;
+using Beis.HelpToGrow.Persistence;
+using Beis.HelpToGrow.Persistence.Models;
 using Beis.ManagementConsole.Web.Extensions;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

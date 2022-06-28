@@ -1,5 +1,4 @@
-﻿global using Beis.Htg.VendorSme.Database.Models;
-global using Beis.ManagementConsole.Web.Controllers;
+﻿global using Beis.ManagementConsole.Web.Controllers;
 global using Beis.ManagementConsole.Web.Models;
 global using MediatR;
 global using Microsoft.AspNetCore.Http;
