@@ -26,10 +26,4 @@
     <ProjectReference Include="..\Beis.ManagementConsole.Web\Beis.ManagementConsole.Web.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="Beis.Htg.VendorSme.Database">
-      <HintPath>..\Beis.ManagementConsole.Repositories\Library\Beis.Htg.VendorSme.Database.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
