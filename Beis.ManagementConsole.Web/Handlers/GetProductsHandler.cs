@@ -4,27 +4,24 @@
     {
         private readonly IProductRepository _productRepository;
         private readonly IVendorCompanyRepository _vendorCompanyRepository;
-        private readonly IMapper _mapper;
 
         public GetProductsHandler(
             IProductRepository productRepository,
-            IVendorCompanyRepository vendorCompanyRepository,
-            IMapper mapper)
+            IVendorCompanyRepository vendorCompanyRepository)
         {
             _productRepository = productRepository;
             _vendorCompanyRepository = vendorCompanyRepository;
-            _mapper = mapper;
         }
 
         public async Task<VendorProductViewModel> Handle(Context request, CancellationToken cancellationToken)
         {
             var vendorCompany = await _vendorCompanyRepository.GetVendorCompanySingle(request.VendorId);
-            var vendorProductViewModel = _mapper.Map<VendorProductViewModel>(vendorCompany);
+            var vendorProductViewModel = VendorMapper.MapProductDetails(vendorCompany);
 
             var vendorProducts = await _productRepository.GetVendorProducts(request.VendorId);
             if (vendorProducts.Count > 0)
             {
-                var productDetails = _mapper.Map<List<ProductDetailViewModel>>(vendorProducts);
+                var productDetails = ProductMapper.MapProductDetails(vendorProducts);
                 var productStatuses = await _productRepository.GetProductStatuses();
                 foreach (var productDetail in productDetails)
                 {

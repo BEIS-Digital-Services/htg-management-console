@@ -1,7 +1,7 @@
-﻿global using AutoMapper;
-global using Beis.HelpToGrow.Persistence.Models;
+﻿global using Beis.HelpToGrow.Persistence.Models;
 global using Beis.ManagementConsole.Repositories.Interface;
 global using Beis.ManagementConsole.Web.Constants;
+global using Beis.ManagementConsole.Web.Mappers;
 global using Beis.ManagementConsole.Web.Models;
 global using Beis.ManagementConsole.Web.Models.Enums;
 global using MediatR;

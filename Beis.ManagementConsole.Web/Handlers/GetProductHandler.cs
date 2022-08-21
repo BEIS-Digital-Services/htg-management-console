@@ -13,7 +13,6 @@ namespace Beis.ManagementConsole.Web.Handlers
         private readonly ISettingsProductCapabilitiesRepository _settingsProductCapabilitiesRepository;
         private readonly IVendorCompanyRepository _vendorCompanyRepository;
         private readonly Options.ServiceCollectionExtensions _logoInformation;
-        private readonly IMapper _mapper;
 
         public GetProductHandler(
             IProductRepository productRepository,
@@ -24,8 +23,7 @@ namespace Beis.ManagementConsole.Web.Handlers
             IProductCapabilitiesRepository productCapabilitiesRepository,
             ISettingsProductCapabilitiesRepository settingsProductCapabilitiesRepository,
             IVendorCompanyRepository vendorCompanyRepository,
-            IOptions<Options.ServiceCollectionExtensions> logoInformationOption,
-            IMapper mapper)
+            IOptions<Options.ServiceCollectionExtensions> logoInformationOption)
         {
             _productRepository = productRepository;
             _settingsProductTypesRepository = settingsProductTypesRepository;
@@ -36,7 +34,6 @@ namespace Beis.ManagementConsole.Web.Handlers
             _settingsProductCapabilitiesRepository = settingsProductCapabilitiesRepository;
             _vendorCompanyRepository = vendorCompanyRepository;
             _logoInformation = logoInformationOption.Value;
-            _mapper = mapper;
         }
 
         public async Task<ProductViewModel> Handle(Context request, CancellationToken cancellationToken)
@@ -77,7 +74,7 @@ namespace Beis.ManagementConsole.Web.Handlers
                 capabilities.Add(product.draft_other_capabilities);
             }
 
-            var productViewModel = _mapper.Map<ProductViewModel>(product);
+            var productViewModel = ProductMapper.Map(product);
             productViewModel.ProductCapabilities = capabilities;
             await AddOtherItems(productViewModel, productId);
             
@@ -99,10 +96,10 @@ namespace Beis.ManagementConsole.Web.Handlers
             return await _vendorCompanyRepository.GetVendorCompanySingle(vendorCompanyId);
         }
 
-        private async Task<List<ProductStatusViewModel>> GetProductStatuses()
+        private async Task<IList<ProductStatusViewModel>> GetProductStatuses()
         {
             var productStatuses = await _productRepository.GetProductStatuses();
-            return _mapper.Map<List<ProductStatusViewModel>>(productStatuses);
+            return ProductMapper.Map(productStatuses);
         }
 
         private async Task AddOtherItems(ProductViewModel productDetails, long productId)
