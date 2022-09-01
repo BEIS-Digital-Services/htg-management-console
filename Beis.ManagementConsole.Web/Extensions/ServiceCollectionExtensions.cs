@@ -96,8 +96,6 @@ namespace Beis.ManagementConsole.Web.Extensions
                 options.KnownProxies.Clear();
             });
 
-            services.AddAutoMapper(c => c.AddProfile<AutoMap>(), typeof(Program));
-
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }

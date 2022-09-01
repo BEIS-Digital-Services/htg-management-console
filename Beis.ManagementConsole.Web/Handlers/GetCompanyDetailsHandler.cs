@@ -4,22 +4,19 @@
     {
         private readonly IVendorCompanyRepository _vendorCompanyRepository;
         private readonly IVendorCompanyStatusRepository _vendorCompanyStatusRepository;
-        private readonly IMapper _mapper;
-
+        
         public GetCompanyDetailsHandler(
             IVendorCompanyRepository vendorCompanyRepository,
-            IVendorCompanyStatusRepository vendorCompanyStatusRepository,
-            IMapper mapper)
+            IVendorCompanyStatusRepository vendorCompanyStatusRepository)
         {
             _vendorCompanyRepository = vendorCompanyRepository;
             _vendorCompanyStatusRepository = vendorCompanyStatusRepository;
-            _mapper = mapper;
         }
 
         public async Task<VendorCompanyViewModel> Handle(Context request, CancellationToken cancellationToken)
         {
             var vendorCompany = await _vendorCompanyRepository.GetVendorCompanySingle(request.CompanyId);
-            var vendorCompanyViewModel = _mapper.Map<VendorCompanyViewModel>(vendorCompany);
+            var vendorCompanyViewModel = VendorMapper.Map(vendorCompany);
 
             if (vendorCompanyViewModel.ApplicationStatusId > 0)
             {

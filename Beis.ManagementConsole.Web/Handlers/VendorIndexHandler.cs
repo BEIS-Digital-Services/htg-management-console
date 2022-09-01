@@ -4,16 +4,13 @@
     {
         private readonly IVendorCompanyRepository _vendorCompanyRepository;
         private readonly IVendorCompanyStatusRepository _vendorCompanyStatusRepository;
-        private readonly IMapper _mapper;
 
         public VendorIndexHandler(
             IVendorCompanyRepository vendorCompanyRepository,
-            IVendorCompanyStatusRepository vendorCompanyStatusRepository,
-            IMapper mapper)
+            IVendorCompanyStatusRepository vendorCompanyStatusRepository)
         {
             _vendorCompanyRepository = vendorCompanyRepository;
             _vendorCompanyStatusRepository = vendorCompanyStatusRepository;
-            _mapper = mapper;
         }
 
         public async Task<IEnumerable<VendorCompanyAccountHomeViewModel>> Handle(Context request, CancellationToken cancellationToken)
@@ -22,7 +19,7 @@
 
             var vendorStatuses = await _vendorCompanyStatusRepository.GetVendorCompaniesStatuses();
 
-            var vendorCompaniesVm = _mapper.Map<List<VendorCompanyAccountHomeViewModel>>(vendorCompanies);
+            var vendorCompaniesVm = VendorMapper.MapAccountDetails(vendorCompanies);
 
             foreach (var item in vendorCompaniesVm)
             {

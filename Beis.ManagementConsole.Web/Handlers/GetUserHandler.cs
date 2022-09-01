@@ -4,25 +4,22 @@
     {
         private readonly IVendorCompanyRepository _vendorCompanyRepository;
         private readonly IVendorCompanyUserRepository _vendorCompanyUserRepository;
-        private readonly IMapper _mapper;
 
         public GetUserHandler(
             IVendorCompanyRepository vendorCompanyRepository,
-            IVendorCompanyUserRepository vendorCompanyUserRepository,
-            IMapper mapper)
+            IVendorCompanyUserRepository vendorCompanyUserRepository)
         {
             _vendorCompanyRepository = vendorCompanyRepository;
             _vendorCompanyUserRepository = vendorCompanyUserRepository;
-            _mapper = mapper;
         }
 
         public async Task<VendorCompanyUserViewModel> Handle(Context request, CancellationToken cancellationToken)
         {
             var vendorCompany = await _vendorCompanyRepository.GetVendorCompanySingle(request.Id);
-            var vendorCompanyUserViewModel = _mapper.Map<VendorCompanyUserViewModel>(vendorCompany);
+            var vendorCompanyUserViewModel = VendorMapper.MapUserDetails(vendorCompany);
 
             var companyUsers = await _vendorCompanyUserRepository.GetVendorCompanyUsersByCompanyId(request.Id);
-            var userViewModel = _mapper.Map<List<UserViewModel>>(companyUsers);
+            var userViewModel = VendorMapper.Map(companyUsers);
             vendorCompanyUserViewModel.Users = userViewModel.OrderByDescending(u => u.PrimaryContact).ThenBy(u => u.FullName);
 
             return vendorCompanyUserViewModel;
